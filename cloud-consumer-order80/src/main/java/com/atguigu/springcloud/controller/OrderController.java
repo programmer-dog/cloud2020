@@ -17,8 +17,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 public class OrderController {
-    public static final String PAYMENR_URL="http://localhost:8001";
-
+//    public static final String PAYMENR_URL="http://localhost:8001";
+    public static final String PAYMENR_URL="http://CLOUD-PAYMENT-SERVICE";    //eureka服务注册的名称，关注的是服务
     @Autowired
     private RestTemplate restTemplate;
 
@@ -29,6 +29,6 @@ public class OrderController {
 
     @GetMapping("comsummer//payment/get/{id}")
     public CommonResult<Payment> queryById(@PathVariable("id") Long id){
-        return restTemplate.getForObject(PAYMENR_URL +  "payment/get/"+id,CommonResult.class);
+        return restTemplate.getForObject(PAYMENR_URL +  "/payment/get/"+id,CommonResult.class);
     }
 }

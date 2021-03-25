@@ -6,6 +6,7 @@ import com.atguigu.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,6 +22,7 @@ public class PaymentController {
     private String serverPort;
     @Autowired
     private PaymentService paymentService;
+
     /**
      * 插入
      * @param payment
@@ -30,11 +32,11 @@ public class PaymentController {
     public CommonResult creat (@RequestBody Payment payment){
         CommonResult commonResult = new CommonResult();
         int result = paymentService.create(payment);
-        log.info("***************插入结果************************" +result);
+        log.info("***************插入结果************************" +result + "端口号" + serverPort );
         if(result>0){
             commonResult.setCode(200);
             commonResult.setData(result);
-            commonResult.setMessage("插入成功！" + serverPort);
+            commonResult.setMessage("插入成功！");
             return commonResult;
         }else{
             return   new CommonResult(200,result,"插入失败！");
